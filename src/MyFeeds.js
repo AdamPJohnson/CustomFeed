@@ -6,9 +6,12 @@ function MyFeeds({ user }) {
     return <HeadlineContainer headline={headline} />;
   });
   return (
-    <div id="topHeadlinesContainer">
-      <h2 id="topHeadlinesHeader">Your Feeds</h2>
-      {headlineList}
+    <div id="myFeedsContainer">
+      <div id="myFeedsHeadlinesContainer">
+        <h2 id="myFeedsHeaderContainer">Your Feeds</h2>
+        {headlineList}
+      </div>
+      <div id="addANewFeed"></div>
     </div>
   );
 }

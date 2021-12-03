@@ -5,8 +5,8 @@ function HeadlineContainer({ headline }) {
     headline;
 
   return (
-    <a className="headlineLink" href={url}>
-      <div className="headlineContainer">
+    <div className="headlineContainer">
+      <a className="headlineLink" href={url}>
         <div className="headlineDetails">
           <strong className="headlineTitle">{title}</strong>
           <br />
@@ -17,8 +17,8 @@ function HeadlineContainer({ headline }) {
           <em className="headlineSource">{source.name}</em>
         </div>
         <img className="headlineImage" src={urlToImage} />
-      </div>
-    </a>
+      </a>
+    </div>
   );
 }
 
