@@ -1,12 +1,25 @@
 import React from "react";
 import Button from "react-bootstrap/button";
-function Header() {
+function Header({ setPage, user }) {
   return (
     <div id="header">
       <span id="headerTitle">custom feed</span>
       <div id="navButtons">
-        <Button variant="outline-light">Home</Button>
-        <Button variant="outline-light">My Feeds</Button>
+        <span id="welcome">Welcome, {user.name}!</span>
+        <Button
+          className="navButton"
+          onClick={() => setPage("top")}
+          variant="outline-light"
+        >
+          Home
+        </Button>
+        <Button
+          className="navButton"
+          onClick={() => setPage("myfeeds")}
+          variant="outline-light"
+        >
+          My Feeds
+        </Button>
       </div>
     </div>
   );

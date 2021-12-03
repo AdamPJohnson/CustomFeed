@@ -8,13 +8,13 @@ function HeadlineContainer({ headline }) {
     <a className="headlineLink" href={url}>
       <div className="headlineContainer">
         <div className="headlineDetails">
-          <span className="headlineTitle">{title}</span>
+          <strong className="headlineTitle">{title}</strong>
           <br />
           <span className="headlineDescription">{description}</span>
           <br />
-          <span className="headlineAuthor">{author}</span>
-          <br />
-          <span className="headlineSource">{source.name}</span>
+          <em className="headlineAuthor">{author}</em>
+          {", "}
+          <em className="headlineSource">{source.name}</em>
         </div>
         <img className="headlineImage" src={urlToImage} />
       </div>
