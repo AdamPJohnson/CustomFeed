@@ -22,7 +22,6 @@ function App() {
       .get(`http://localhost:3000/topHeadlines/`)
       .then((headlines) => {
         setTopHeadlines(headlines.data);
-        console.log(headlines.data);
       })
       .catch((e) => console.log(e));
   }, []);

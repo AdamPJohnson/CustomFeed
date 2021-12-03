@@ -40,6 +40,17 @@ body {
     flex-direction: row;
     height: 10vh;
     font-size: 3em;
+    padding: 0.5em;
+  }
+  #categories,
+  #sources {
+    width: 10vw;
+  }
+  #myFeedsListContainer {
+    height: 100%;
+  }
+  #addFeed {
+    height: 100%;
   }
 }
 
@@ -72,6 +83,19 @@ body {
     flex-direction: column;
     height: 15vh;
     font-size: 2em;
+    padding: 0em;
+  }
+  #myFeedsPage {
+    flex-direction: column;
+  }
+  #categories,
+  #sources {
+    width: 50vw;
+  }
+  #myFeedsListContainer {
+    max-height: 20vh;
+  }
+  #addFeed {
   }
 }
 
@@ -83,7 +107,6 @@ body {
   align-items: center;
   justify-content: space-between;
   width: 100vw;
-  padding: 0.5em;
 }
 
 #navButtons {
@@ -107,27 +130,50 @@ body {
 #topHeadlinesContainer {
   overflow: scroll;
 }
-#myFeedsContainer {
+#myFeedsPage {
   display: flex;
-  flex-direction: row;
+
   padding: 1em;
   height: 100%;
   box-sizing: border-box;
 }
 
-#myFeedsHeadlinesContainer {
-  border: 1px solid black;
+#myFeedsListContainer {
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
   flex: 2;
-  margin: 1em;
-  height: 100%;
-}
-#addANewFeed {
-  border: 1px solid black;
-  flex: 1;
-  margin: 1em;
-  height: 100%;
+  /* margin: 0.5em; */
+  padding: 1em;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  align-items: center;
 }
 
+#myFeedsHeaderContainer {
+  font-weight: bold;
+}
+#addFeed {
+  flex: 1;
+  margin: 0.5em;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#submitFeed {
+  margin: 0.5em;
+}
+#addFeedForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+  padding: 1em;
+  margin: 1em;
+}
 .headlineContainer {
   /* border: 1px solid black; */
   box-shadow: 1px 1px 7px rgba(0, 0, 0, 0.5);
@@ -151,6 +197,9 @@ body {
 .headlineDescription {
   font-size: 0.9em;
 }
+#submitSpec {
+  margin: 1em;
+}
 
 .headlineImage {
   box-shadow: 1px 1px 7px rgba(0, 0, 0, 0.5);
@@ -164,4 +213,17 @@ body {
 a {
   color: inherit;
   text-decoration: none;
+}
+
+#currentFeedSpecsText {
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+  max-height: 30%;
+  min-width: 100%;
+  text-align: center;
+  padding: 1em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: scroll;
 }

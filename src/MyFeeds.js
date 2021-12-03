@@ -1,17 +1,15 @@
 import React, { useState } from "react";
-
+import AddFeed from "./AddFeed";
 function MyFeeds({ user }) {
-  const [headlines, setHeadlines] = useState([]);
-  const headlineList = headlines.map((headline) => {
-    return <HeadlineContainer headline={headline} />;
-  });
+  const [feeds, setFeeds] = useState([]);
+
   return (
-    <div id="myFeedsContainer">
-      <div id="myFeedsHeadlinesContainer">
+    <div id="myFeedsPage">
+      <div id="myFeedsListContainer">
         <h2 id="myFeedsHeaderContainer">Your Feeds</h2>
-        {headlineList}
+        {/* {feedList} */}
       </div>
-      <div id="addANewFeed"></div>
+      <AddFeed user={user} />
     </div>
   );
 }

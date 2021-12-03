@@ -17,6 +17,20 @@ app.get("/topHeadlines/", (req, res) => {
       res.status(404).send();
     });
 });
+app.get("/sources/", (req, res) => {
+  axios
+    .get(
+      `https://newsapi.org/v2/top-headlines/sources/?country=us&apiKey=${API_KEY}`
+    )
+    .then((sources) => {
+      console.log(sources.data.sources.length);
+      res.status(200).send(sources.data.sources);
+    })
+    .catch((e) => {
+      console.log(e);
+      res.status(404).send();
+    });
+});
 app.get("/headlines/:query/", (req, res) => {
   console.log("hi");
   let { query } = req.params;
