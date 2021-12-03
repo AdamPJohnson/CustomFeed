@@ -5,14 +5,50 @@ const app = express();
 app.use(cors());
 const { API_KEY } = require("./config");
 
-app.get("/headlines/:query", (req, res) => {
+app.get("/topHeadlines/", (req, res) => {
+  axios
+    .get(`https://newsapi.org/v2/top-headlines/?country=us&apiKey=${API_KEY}`)
+    .then((d) => {
+      console.log(d.data.articles);
+      res.status(200).send(d.data.articles.slice(0, 10));
+    })
+    .catch((e) => {
+      console.log(e);
+      res.status(404).send();
+    });
+});
+app.get("/headlines/:query/", (req, res) => {
   console.log("hi");
+  let { query } = req.params;
+  query = query || "";
+
+  axios
+    .get(`https://newsapi.org/v2/top-headlines?q=${query}&apiKey=${API_KEY}`)
+    .then((d) => {
+      console.log(d.data.articles);
+      res.status(200).send(d.data.articles.slice(0, 10));
+    })
+    .catch((e) => {
+      console.log(e);
+      res.status(404).send();
+    });
+});
+app.get("/headlines/:sources/:category", (req, res) => {
+  let { sources, category } = req.params;
+  sources = sources || "";
+  category = category || "";
   axios
     .get(
-      `https://newsapi.org/v2/everything?q=Apple&from=2021-12-03&sortBy=popularity&apiKey=${API_KEY}`
+      `https://newsapi.org/v2/top-headlines?sources=${sources}&category=${category}&apiKey=${API_KEY}`
     )
-
-    .then((d) => console.log(d.data.articles.slice(0, 10)));
+    .then((d) => {
+      console.log(d.data.articles);
+      res.status(200).send(d.data.articles.slice(0, 10));
+    })
+    .catch((e) => {
+      console.log(e);
+      res.status(404).send();
+    });
 });
 
 module.exports = app;
