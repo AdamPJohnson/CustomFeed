@@ -1,11 +1,12 @@
 import React from "react";
 import Button from "react-bootstrap/button";
-
-function FeedListItem({ feed, setIsOpen, setDetailFeed }) {
+import axios from "axios";
+function FeedListItem({ feed, setIsOpen, setDetailFeed, user, setUser }) {
   const onDetailClick = () => {
     setDetailFeed(feed);
     setIsOpen(true);
   };
+
   const onDeleteClick = () => {
     console.log(feed.name);
     axios
@@ -22,22 +23,24 @@ function FeedListItem({ feed, setIsOpen, setDetailFeed }) {
   return (
     <div className="feedListItem">
       <span className="feedListName">{feed.name}</span>
-      <Button
-        variant="outline-dark"
-        className="feedListButton"
-        onClick={onDetailClick}
-        size="s"
-      >
-        Details
-      </Button>
-      <Button
-        variant="outline-dark"
-        className="feedListButton"
-        onClick={onDeleteClick}
-        size="s"
-      >
-        Delete
-      </Button>
+      <div className="feedListButtons">
+        <Button
+          variant="outline-dark"
+          className="feedListButton"
+          onClick={onDetailClick}
+          size="s"
+        >
+          Details
+        </Button>
+        <Button
+          variant="outline-dark"
+          className="feedListButton"
+          onClick={onDeleteClick}
+          size="s"
+        >
+          Delete
+        </Button>
+      </div>
     </div>
   );
 }
