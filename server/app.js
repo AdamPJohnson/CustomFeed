@@ -44,7 +44,7 @@ app.patch("/feeds", async (req, res) => {
 });
 app.patch("/feeds/:feedName/:userName", async (req, res) => {
   const { feedName, userName } = req.params;
-  console.log(feedName, userName);
+
   User.updateOne(
     { name: userName },
     {
@@ -68,7 +68,6 @@ app.get("/feeds", async (req, res) => {
 app.get("/customFeed", (req, res) => {
   const rules = JSON.parse(req.query.feed).rules;
 
-  console.log({ rules });
   Promise.all(
     rules.map((rule) => {
       const { source } = rule;
@@ -90,7 +89,6 @@ app.get("/customFeed", (req, res) => {
       headlines = headlines.sort(
         (a, b) => new Date(b.publishedAt) - new Date(a.publishedAt)
       );
-      headlines.forEach((e) => console.log(new Date(e.publishedAt)));
 
       res.status(200).send(headlines);
     })

@@ -5,12 +5,13 @@ import Headlines from "./Headlines";
 import MyFeeds from "./MyFeeds";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../styles.css";
-import { GridLoader } from "react-spinners";
+import { PropagateLoader } from "react-spinners";
 const userName = "Adam";
 
 function App() {
   const [headlines, setHeadlines] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [currentFeedName, setCurrentFeedName] = useState("Select a Feed...");
   const [user, setUser] = useState({
     name: "Adam",
     zip: 94606,
@@ -59,7 +60,7 @@ function App() {
   return (
     <>
       <Header setPage={setPage} user={user} />
-      {loading && <GridLoader color="purple" />}
+      {loading && <PropagateLoader color="purple" />}
       {!loading && (
         <>
           {page === "home" && (
@@ -69,6 +70,8 @@ function App() {
                 user={user}
                 setCurrentFeed={setCurrentFeed}
                 loading={loading}
+                currentFeedName={currentFeedName}
+                setCurrentFeedName={setCurrentFeedName}
               />
             </div>
           )}

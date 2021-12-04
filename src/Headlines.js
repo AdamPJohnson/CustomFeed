@@ -2,8 +2,13 @@ import React, { useState } from "react";
 import HeadlineContainer from "./HeadlineContainer.js";
 import { GridLoader } from "react-spinners";
 
-function Headlines({ headlines, user, setCurrentFeed }) {
-  const [currentFeedName, setCurrentFeedName] = useState("Select a Feed...");
+function Headlines({
+  headlines,
+  user,
+  setCurrentFeed,
+  currentFeedName,
+  setCurrentFeedName,
+}) {
   const onFeedChange = (e) => {
     const feedObj = user.feeds.filter(
       (feed) => feed.name === e.target.value
