@@ -70,11 +70,16 @@ app.get("/customFeed", (req, res) => {
 
   Promise.all(
     rules.map((rule) => {
-      const { source } = rule;
+      const { source, category } = rule;
       return axios
         .get(
-          `https://newsapi.org/v2/everything/?sources=${source}&apiKey=${API_KEY}`
+          `https://newsapi.org/v2/top-headlines/?country=us&category=${category}&apiKey=${API_KEY}`
         )
+        .then((headline) => {
+          let { articles } = headline.data;
+          articles = articles.filter((article) => (article.source.id = source));
+          return articles;
+        })
         .catch((e) => {
           console.log(e);
           return [];
@@ -82,9 +87,8 @@ app.get("/customFeed", (req, res) => {
     })
   )
     .then((resultArray) => {
-      let headlines = resultArray
-        .map((array) => (array.data ? array.data.articles : []))
-        .flat();
+      let headlines = resultArray.flat();
+      console.log(headlines);
 
       headlines = headlines.sort(
         (a, b) => new Date(b.publishedAt) - new Date(a.publishedAt)
@@ -125,7 +129,6 @@ app.get("/sources/", (req, res) => {
       `https://newsapi.org/v2/top-headlines/sources/?country=us&apiKey=${API_KEY}`
     )
     .then((sources) => {
-      console.log(sources.data.sources.length);
       res.status(200).send(sources.data.sources);
     })
     .catch((e) => {

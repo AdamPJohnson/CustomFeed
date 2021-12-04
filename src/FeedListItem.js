@@ -6,8 +6,8 @@ function FeedListItem({ feed, setIsOpen, setDetailFeed, user, setUser }) {
     setDetailFeed(feed);
     setIsOpen(true);
   };
+
   const onDeleteClick = () => {
-    console.log(feed.name);
     axios
       .patch(`http://localhost:3000/feeds/${feed.name}/${user.name}`)
       .then(() => {

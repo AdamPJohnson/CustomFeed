@@ -18,7 +18,9 @@ function FeedDetail({ feed, isOpen, setIsOpen, sources }) {
           return source.id === rule.source;
         })[0];
         ruleSource = ruleSource ? ruleSource.name : rule.source;
-
+        const ruleCategory = rule.category
+          ? rule.category.slice(0, 1).toUpperCase() + rule.category.slice(1)
+          : "none";
         return (
           <>
             <strong>Source:</strong>

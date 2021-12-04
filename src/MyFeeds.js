@@ -37,6 +37,7 @@ function MyFeeds({ user, setUser }) {
           isOpen={isOpen}
           feed={detailFeed}
           sources={sources}
+          user={user}
         />
       )}
     </div>
