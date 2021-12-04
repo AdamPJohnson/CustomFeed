@@ -9,7 +9,6 @@ const userSchema = new mongoose.Schema({
       rules: [
         {
           source: String,
-          category: String,
         },
       ],
     },

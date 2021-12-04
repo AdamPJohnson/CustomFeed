@@ -12,7 +12,6 @@ function AddFeed({ sources, user, setUser }) {
   );
   const [formData, setFormData] = useState({
     source: "",
-    category: "",
     feedName: "",
   });
 
@@ -48,14 +47,11 @@ function AddFeed({ sources, user, setUser }) {
     if (!formData.source) {
       return setErrorMessage("Please select a source");
     }
-    if (!formData.category) {
-      return setErrorMessage("Please select a category");
-    }
 
     const newSpecs = [...specs];
-    const { source, category } = formData;
-    const spec = { source, category };
-    if (!newSpecs.some((s) => s.source === source && s.category === category)) {
+    const { source } = formData;
+    const spec = { source };
+    if (!newSpecs.some((s) => s.source === source)) {
       newSpecs.push(spec);
       setSpecs(newSpecs);
     }
@@ -70,15 +66,13 @@ function AddFeed({ sources, user, setUser }) {
       const source = sources.filter(
         (s) => s.id === specs[specs.length - 1].source
       )[0];
-      const category =
-        specs[specs.length - 1].category.slice(0, 1).toUpperCase() +
-        specs[specs.length - 1].category.slice(1);
+
       if (firstSpec.current) {
-        setCurrentFeedSpecsText(`${category} from ${source.name}`);
+        setCurrentFeedSpecsText(`${source.name}`);
         firstSpec.current = false;
       } else {
         let newSpecsText = currentFeedSpecsText;
-        newSpecsText += `,<br/>${category} from ${source.name}`;
+        newSpecsText += `,<br/>${source.name}`;
         setCurrentFeedSpecsText(newSpecsText);
       }
     } else {
@@ -100,22 +94,8 @@ function AddFeed({ sources, user, setUser }) {
       <h4>Add a Custom Feed!</h4>
 
       <form id="addFeedForm">
-        <strong>I want</strong>
-        <label htmlFor="category"></label>
-        <select
-          value={formData.category}
-          onChange={onChange}
-          name="category"
-          id="categories"
-        >
-          <option value="">Category</option>
-          <option value="business">Business</option>
-          <option value="entertainment">Entertainment</option>
-          <option value="health">Health</option>
-          <option value="science">Science</option>
-          <option value="sports">Sports</option>
-          <option value="technology">Technology</option>
-        </select>
+        <strong>I want news</strong>
+
         <strong>from</strong>
         <label htmlFor="source"></label>
         <select

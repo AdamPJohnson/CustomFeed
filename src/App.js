@@ -15,9 +15,13 @@ function App() {
     zip: 94606,
     feeds: [],
   });
-  const [page, setPage] = useState("top");
+  const [page, setPage] = useState("home");
   const [currentFeed, setCurrentFeed] = useState({});
   const firstRender = useRef(true);
+
+  const fetchFeed = (feed) => {
+    return axios.get(`http://localhost:3000/customFeed/`, { params: { feed } });
+  };
   useEffect(() => {
     axios
       .get(`http://localhost:3000/topHeadlines/`)
@@ -36,23 +40,28 @@ function App() {
 
   useEffect(() => {
     if (!firstRender.current) {
+      console.log(currentFeed);
       fetchFeed(currentFeed)
         .then((headlines) => {
           setHeadlines([headlines.data]);
         })
         .catch((e) => console.log(e));
+    } else {
+      firstRender.current = false;
     }
   }, [currentFeed]);
 
-  const fetchFeed = (feed) => {
-    return axios.get(`http://localhost:3000/customFeed`, { feed });
-  };
   return (
     <>
       <Header setPage={setPage} user={user} />
-      {page === "top" && (
+      {page === "home" && (
         <div id="mainContainer">
-          <Headlines headlines={headlines} user={user} />
+          <Headlines
+            headlines={headlines}
+            user={user}
+            setCurrentFeed={setCurrentFeed}
+            currentFeed={currentFeed}
+          />
         </div>
       )}
       {page === "myfeeds" && (

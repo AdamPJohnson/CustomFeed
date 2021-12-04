@@ -17,14 +17,11 @@ function FeedDetail({ feed, isOpen, setIsOpen, sources }) {
           return source.id === rule.source;
         })[0];
         ruleSource = ruleSource ? ruleSource.name : rule.source;
-        const ruleCategory =
-          rule.category.slice(0, 1).toUpperCase() + rule.category.slice(1);
+
         return (
           <>
             <strong>Source:</strong>
             <span>{ruleSource}</span>
-            <strong>Category:</strong>
-            <span>{ruleCategory}</span>
           </>
         );
       })

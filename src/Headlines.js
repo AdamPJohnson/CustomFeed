@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import HeadlineContainer from "./HeadlineContainer.js";
 
-function Headlines({ headlines, user }) {
-  const [currentFeed, setCurrentFeed] = useState("");
-
+function Headlines({ headlines, user, setCurrentFeed, currentFeed }) {
+  const [currentFeedName, setCurrentFeedName] = useState("Select a Feed...");
   const onFeedChange = (e) => {
-    setCurrentFeed(e.target.value);
-    console.log(currentFeed);
+    const feedObj = user.feeds.filter(
+      (feed) => feed.name === e.target.value
+    )[0];
+    setCurrentFeed(feedObj);
+    setCurrentFeedName(e.target.value);
   };
   const headlineList = headlines.map((headline) => {
     return <HeadlineContainer headline={headline} />;
@@ -17,13 +19,14 @@ function Headlines({ headlines, user }) {
         return <option value={feed.name}>{feed.name}</option>;
       })
     : [];
+
   return (
     <div id="topHeadlinesContainer">
       <div id="headlineHeader">
         <h2 id="topHeadlinesHeader">Top Headlines</h2>
 
         <select
-          value={currentFeed}
+          value={currentFeedName}
           onChange={onFeedChange}
           name="feed"
           id="feeds"
