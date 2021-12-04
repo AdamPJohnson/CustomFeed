@@ -42,6 +42,23 @@ app.patch("/feeds", async (req, res) => {
     }
   });
 });
+app.patch("/feeds/:feedName/:userName", async (req, res) => {
+  const { feedName, userName } = req.params;
+  console.log(feedName, userName);
+  User.updateOne(
+    { name: userName },
+    {
+      $pull: { feeds: { name: feedName } },
+    }
+  )
+    .then((d) => {
+      res.status(200).send();
+    })
+    .catch((e) => {
+      console.log({ e });
+      res.status(400).send();
+    });
+});
 
 app.get("/feeds", async (req, res) => {
   const { userName } = req.body;

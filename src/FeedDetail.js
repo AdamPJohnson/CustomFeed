@@ -6,6 +6,7 @@ const customStyles = {
     borderRadius: "10px",
     border: "none",
     boxShadow: "1px 1px 5px rgba(0,0,0,0.2)",
+    alignSelf: "center",
   },
 };
 
@@ -32,6 +33,8 @@ function FeedDetail({ feed, isOpen, setIsOpen, sources }) {
       style={customStyles}
       isOpen={isOpen}
       onRequestClose={() => setIsOpen(false)}
+      id="detailModal"
+      centered
     >
       <div id="modalContents">
         <span id="feedModalName">{feed.name}</span>

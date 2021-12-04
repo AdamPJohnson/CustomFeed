@@ -50,11 +50,37 @@ body {
   }
   #myFeedsListContainer {
     height: 100%;
+    padding-top: 5em;
+    padding-bottom: 5em;
   }
   #addFeed {
     height: 100%;
   }
   .feedListItem {
+    width: 90%;
+    border-radius: 5px;
+    height: 5vh;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+    padding: 0.3em;
+    padding-left: 0.5em;
+    margin: 0.2em;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .feedListButtons {
+    width: 40%;
+    padding-left: 2em;
+    padding-right: 2em;
+  }
+  .feedListButton {
+    height: 2em;
+  }
+  #detailModal {
+    width: 50%;
+    height: 50%;
+    margin: auto;
   }
 }
 
@@ -117,9 +143,20 @@ body {
     align-items: center;
     justify-content: space-between;
   }
+  .feedListName {
+    font-size: 0.7em;
+  }
   .selectFeedButton {
     height: 2em;
   }
+  .feedListButtons {
+    width: 65%;
+  }
+}
+.feedListButtons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 #header {
@@ -169,9 +206,10 @@ body {
   flex: 2;
   /* margin: 0.5em; */
   padding: 1em;
+
   display: flex;
   flex-direction: column;
-  /* justify-content: center; */
+  justify-content: space-between;
   align-items: center;
 }
 

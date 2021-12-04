@@ -21,6 +21,8 @@ function MyFeeds({ user, setUser }) {
             feed={feed}
             setIsOpen={setIsOpen}
             setDetailFeed={setDetailFeed}
+            user={user}
+            setUser={setUser}
           />
         );
       })
