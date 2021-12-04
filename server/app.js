@@ -69,12 +69,16 @@ app.get("/customFeed", (req, res) => {
       let headlines = resultArray
         .map((array) => (array.data ? array.data.articles : []))
         .flat();
-      console.log(headlines);
-      headlines = headlines.sort((a, b) => a.publishedAt > b.publishedAt);
+
+      headlines = headlines.sort(
+        (a, b) => new Date(b.publishedAt) - new Date(a.publishedAt)
+      );
       headlines.forEach((e) => console.log(new Date(e.publishedAt)));
+
       res.status(200).send(headlines);
     })
     .catch((e) => {
+      console.log(e);
       res.status(404).send();
     });
 });

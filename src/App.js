@@ -43,7 +43,8 @@ function App() {
       console.log(currentFeed);
       fetchFeed(currentFeed)
         .then((headlines) => {
-          setHeadlines([headlines.data]);
+          console.log(headlines);
+          setHeadlines(headlines.data);
         })
         .catch((e) => console.log(e));
     } else {
