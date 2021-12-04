@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import HeadlineContainer from "./HeadlineContainer.js";
 
 function Headlines({ headlines, user }) {
-  const [currentFeed, setCurrentFeed] = useState("");
+  const [currentFeed, setCurrentFeedName] = useState("");
 
   const onFeedChange = (e) => {
     setCurrentFeed(e.target.value);
