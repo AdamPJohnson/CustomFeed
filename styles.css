@@ -52,6 +52,8 @@ body {
   #addFeed {
     height: 100%;
   }
+  .feedListItem {
+  }
 }
 
 /* mobile */
@@ -94,8 +96,24 @@ body {
   }
   #myFeedsListContainer {
     max-height: 20vh;
+    overflow: scroll;
   }
   #addFeed {
+  }
+  .feedListItem {
+    width: 90%;
+    border-radius: 5px;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+    padding: 0.3em;
+    padding-left: 0.5em;
+    margin: 0.2em;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .selectFeedButton {
+    height: 2em;
   }
 }
 
@@ -108,7 +126,10 @@ body {
   justify-content: space-between;
   width: 100vw;
 }
-
+#headlineHeader {
+  display: flex;
+  flex-direction: row;
+}
 #navButtons {
   display: flex;
   flex-direction: row;
@@ -155,13 +176,25 @@ body {
 #addFeed {
   flex: 1;
   margin: 0.5em;
-
+  font-size: 0.8em;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 
+#feedName {
+  box-shadow: inset 1px 1px 5px rgba(0, 0, 0, 0.2);
+  padding: 0.2em;
+  text-align: center;
+}
+
+#categories,
+#sources {
+  box-shadow: inset 1px 1px 5px rgba(0, 0, 0, 0.2);
+  height: 1.5em;
+  text-align: center;
+}
 #submitFeed {
   margin: 0.5em;
 }
@@ -171,7 +204,7 @@ body {
   align-items: center;
   justify-content: center;
   box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
-  padding: 1em;
+  padding: 0.5em;
   margin: 1em;
 }
 .headlineContainer {
@@ -199,6 +232,14 @@ body {
 }
 #submitSpec {
   margin: 1em;
+  font-size: 0.8em;
+  height: 2em;
+}
+
+#errorMessage {
+  font-size: 0.5em;
+  color: red;
+  height: 1em;
 }
 
 .headlineImage {
@@ -217,7 +258,8 @@ a {
 
 #currentFeedSpecsText {
   box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
-  max-height: 30%;
+  min-height: 20%;
+  max-height: 20%;
   min-width: 100%;
   text-align: center;
   padding: 1em;

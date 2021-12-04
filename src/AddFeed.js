@@ -14,9 +14,16 @@ function AddFeed() {
   const [formData, setFormData] = useState({
     source: "",
     category: "",
+    feedName: "",
   });
 
   const onSubmitFeed = (e) => {
+    if (!specs.length) {
+      return setErrorMessage("Add some news!");
+    }
+    if (!formData.feedName) {
+      return setErrorMessage("Please name this feed");
+    }
     e.preventDefault();
     console.log(specs);
   };
@@ -28,6 +35,7 @@ function AddFeed() {
     if (!formData.category) {
       return setErrorMessage("Please select a category");
     }
+
     const newSpecs = [...specs];
     const { source, category } = formData;
     const spec = { source, category };
@@ -112,8 +120,11 @@ function AddFeed() {
         <Button id="submitSpec" onClick={onSubmitSpec}>
           Add To Feed
         </Button>
+        <span id="errorMessage">{errorMessage}</span>
       </form>
       <div id="currentFeedSpecsText"></div>
+      <label htmlFor="feedName">Feed Name:</label>
+      <input id="feedName" type="text" name="feedName" onChange={onChange} />
       <Button id="submitFeed" onClick={onSubmitFeed}>
         Submit Feed
       </Button>
