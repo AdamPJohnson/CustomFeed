@@ -52,6 +52,7 @@ body {
     height: 100%;
     padding-top: 5em;
     padding-bottom: 5em;
+    justify-content: center;
   }
   #addFeed {
     height: 100%;
@@ -59,11 +60,11 @@ body {
   .feedListItem {
     width: 90%;
     border-radius: 5px;
-    height: 5vh;
+    height: 10vh;
     box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
     padding: 0.3em;
     padding-left: 0.5em;
-    margin: 0.2em;
+    margin: 0.5em;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -76,6 +77,7 @@ body {
   }
   .feedListButton {
     height: 2em;
+    padding: 1em;
   }
   #detailModal {
     width: 50%;
@@ -128,6 +130,7 @@ body {
   #myFeedsListContainer {
     max-height: 20vh;
     overflow: scroll;
+    justify-content: space-between;
   }
   #addFeed {
   }
@@ -146,8 +149,9 @@ body {
   .feedListName {
     font-size: 0.7em;
   }
-  .selectFeedButton {
+  .feedListButton {
     height: 2em;
+    padding: 1em;
   }
   .feedListButtons {
     width: 65%;
@@ -202,14 +206,13 @@ body {
 }
 
 #myFeedsListContainer {
-  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+  /* box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2); */
   flex: 2;
   /* margin: 0.5em; */
   padding: 1em;
 
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   align-items: center;
 }
 

@@ -8,7 +8,7 @@ function AddFeed({ sources, user, setUser }) {
   const firstSpec = useRef(true);
 
   const [currentFeedSpecsText, setCurrentFeedSpecsText] = useState(
-    "Pick a source and a topic to start customizing your feed!"
+    "Pick a source to start customizing your feed!"
   );
   const [formData, setFormData] = useState({
     source: "",
