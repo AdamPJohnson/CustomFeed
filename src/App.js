@@ -6,31 +6,18 @@ import MyFeeds from "./MyFeeds";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../styles.css";
 
-const currentUser = {
-  name: "Adam",
-  zip: 94606,
-  feeds: [
-    { name: "Feed1", rules: [{ source: "bbc-news", category: "business" }] },
-    {
-      name: "Feed2",
-      rules: [
-        { source: "reuters", category: "health" },
-        { source: "reuters", category: "business" },
-        { source: "bbc-news", category: "science" },
-      ],
-    },
-    { name: "Feed3", rules: [] },
-  ],
-};
+const userName = "Adam";
 
 function App() {
   const [headlines, setHeadlines] = useState([]);
+  const [user, setUser] = useState({
+    name: "Adam",
+    zip: 94606,
+    feeds: [],
+  });
   const [page, setPage] = useState("top");
   const [currentFeed, setCurrentFeed] = useState({});
   const firstRender = useRef(true);
-  const query = "trump";
-  const sources = "bbc-news";
-  const category = "covid";
   useEffect(() => {
     axios
       .get(`http://localhost:3000/topHeadlines/`)
@@ -38,6 +25,13 @@ function App() {
         setHeadlines(headlines.data);
       })
       .catch((e) => console.log(e));
+
+    axios
+      .get(`http://localhost:3000/users/${userName}`)
+      .then((d) => {
+        setUser(d.data[0]);
+      })
+      .catch((error) => console.log({ error }));
   }, []);
 
   useEffect(() => {
@@ -55,15 +49,15 @@ function App() {
   };
   return (
     <>
-      <Header setPage={setPage} user={currentUser} />
+      <Header setPage={setPage} user={user} />
       {page === "top" && (
         <div id="mainContainer">
-          <Headlines headlines={headlines} user={currentUser} />
+          <Headlines headlines={headlines} user={user} />
         </div>
       )}
       {page === "myfeeds" && (
         <div id="mainContainer">
-          <MyFeeds user={currentUser} />
+          <MyFeeds user={user} setUser={setUser} />
         </div>
       )}
     </>

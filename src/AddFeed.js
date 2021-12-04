@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Button } from "@chakra-ui/react";
 import axios from "axios";
-function AddFeed({ sources, user }) {
+function AddFeed({ sources, user, setUser }) {
   const [specs, setSpecs] = useState([]);
   const [errorMessage, setErrorMessage] = useState("");
   const firstUpdate = useRef(true);
@@ -35,6 +35,7 @@ function AddFeed({ sources, user }) {
       .patch("http://localhost:3000/feeds/", payload)
       .then((d) => {
         setErrorMessage("");
+        setUser(d.data);
         console.log(d);
       })
       .catch((e) => {

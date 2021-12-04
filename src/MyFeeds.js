@@ -3,7 +3,7 @@ import AddFeed from "./AddFeed";
 import FeedListItem from "./FeedListItem";
 import FeedDetail from "./FeedDetail";
 import axios from "axios";
-function MyFeeds({ user }) {
+function MyFeeds({ user, setUser }) {
   const [isOpen, setIsOpen] = useState(false);
   const [detailFeed, setDetailFeed] = useState(null);
   const [sources, setSources] = useState([]);
@@ -28,7 +28,7 @@ function MyFeeds({ user }) {
   return (
     <div id="myFeedsPage">
       <div id="myFeedsListContainer">{feedList}</div>
-      <AddFeed user={user} sources={sources} />
+      <AddFeed user={user} sources={sources} setUser={setUser} />
       {detailFeed && (
         <FeedDetail
           setIsOpen={setIsOpen}

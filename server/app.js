@@ -26,18 +26,41 @@ app.patch("/feeds", async (req, res) => {
         }
       });
     } else {
-      User.updateOne({ name: userName }, { $push: { feeds: feed } }).then((d) =>
-        console.log(d)
-      );
+      User.findOneAndUpdate(
+        { name: userName },
+        { $push: { feeds: feed } },
+        { new: true }
+      )
+        .then((d) => {
+          res.status(201).send(d);
+        })
+        .catch((e) => {
+          console.log(e);
+          res.status(409).send();
+        });
     }
   });
+});
+
+app.get("/feeds", async (req, res) => {
+  const { userName } = req.body;
+  User.find({ name: userName }).then((user) => console.log(user));
+});
+app.get("/users/:userName", async (req, res) => {
+  const { userName } = req.params;
+
+  User.find({ name: userName })
+    .then((user) => res.status(200).send(user))
+    .catch((error) => {
+      console.log(error);
+      res.status(404).send(error);
+    });
 });
 
 app.get("/topHeadlines/", (req, res) => {
   axios
     .get(`https://newsapi.org/v2/top-headlines/?country=us&apiKey=${API_KEY}`)
     .then((d) => {
-      console.log(d.data.articles);
       res.status(200).send(d.data.articles.slice(0, 10));
     })
     .catch((e) => {

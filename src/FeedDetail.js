@@ -29,6 +29,7 @@ function FeedDetail({ feed, isOpen, setIsOpen, sources }) {
         );
       })
     : "This feed has no rules";
+
   return (
     <Modal
       style={customStyles}
