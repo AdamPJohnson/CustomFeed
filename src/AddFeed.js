@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Button } from "@chakra-ui/react";
+import Button from "react-bootstrap/button";
 import axios from "axios";
 function AddFeed({ sources, user, setUser }) {
   const [specs, setSpecs] = useState([]);
@@ -127,7 +127,7 @@ function AddFeed({ sources, user, setUser }) {
           <option value="">Source</option>
           {sourceOptions}
         </select>
-        <Button id="submitSpec" onClick={onSubmitSpec}>
+        <Button variant="outline-dark" id="submitSpec" onClick={onSubmitSpec}>
           Add To Feed
         </Button>
         <span id="errorMessage">{errorMessage}</span>
@@ -141,7 +141,7 @@ function AddFeed({ sources, user, setUser }) {
         value={formData.feedName}
         onChange={onChange}
       />
-      <Button id="submitFeed" onClick={onSubmitFeed}>
+      <Button variant="outline-dark" id="submitFeed" onClick={onSubmitFeed}>
         Submit Feed
       </Button>
     </div>

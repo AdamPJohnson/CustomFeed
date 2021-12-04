@@ -1,5 +1,6 @@
 import React from "react";
-import { Button } from "@chakra-ui/react";
+import Button from "react-bootstrap/button";
+
 function FeedListItem({ feed, setIsOpen, setDetailFeed }) {
   const onDetailClick = () => {
     setDetailFeed(feed);
@@ -8,11 +9,19 @@ function FeedListItem({ feed, setIsOpen, setDetailFeed }) {
   return (
     <div className="feedListItem">
       <span className="feedListName">{feed.name}</span>
-      <Button size="xs">Select</Button>
-      <Button onClick={onDetailClick} size="xs">
+      <Button className="navButton" variant="outline-dark">
+        Select
+      </Button>
+      <Button
+        className="navButton"
+        variant="outline-dark"
+        onClick={onDetailClick}
+      >
         Details
       </Button>
-      <Button size="xs">Delete</Button>
+      <Button className="navButton" variant="outline-dark">
+        Delete
+      </Button>
     </div>
   );
 }

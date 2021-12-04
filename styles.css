@@ -1,3 +1,11 @@
+#root {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 html {
   height: 100vh;
   width: 100vw;
@@ -43,6 +51,11 @@ body {
     height: 10vh;
     font-size: 3em;
     padding: 0.5em;
+    justify-content: space-between;
+  }
+  #mainContainer {
+    height: 90vh;
+    margin-top: 10vh;
   }
   #categories,
   #sources {
@@ -50,11 +63,39 @@ body {
   }
   #myFeedsListContainer {
     height: 100%;
+    padding-top: 5em;
+    padding-bottom: 5em;
+    justify-content: center;
   }
   #addFeed {
     height: 100%;
   }
   .feedListItem {
+    width: 90%;
+    border-radius: 5px;
+    height: 10vh;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+    padding: 0.3em;
+    padding-left: 0.5em;
+    margin: 0.5em;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .feedListButtons {
+    width: 40%;
+    padding-left: 2em;
+    padding-right: 2em;
+  }
+
+  #detailModal {
+    width: 50%;
+    height: 50%;
+    margin: auto;
+  }
+  #feeds {
+    height: 2em;
   }
 }
 
@@ -88,9 +129,14 @@ body {
   }
   #header {
     flex-direction: column;
-    height: 18vh;
+    height: 15vh;
     font-size: 2em;
-    padding: 0em;
+    margin-bottom: 0.1em;
+    justify-content: center;
+  }
+  #mainContainer {
+    height: 85vh;
+    margin-top: 15vh;
   }
   #myFeedsPage {
     flex-direction: column;
@@ -100,8 +146,9 @@ body {
     width: 50vw;
   }
   #myFeedsListContainer {
-    max-height: 20vh;
+    max-height: 25vh;
     overflow: scroll;
+    justify-content: space-between;
   }
   #addFeed {
   }
@@ -117,23 +164,37 @@ body {
     align-items: center;
     justify-content: space-between;
   }
-  .selectFeedButton {
-    height: 2em;
+  .feedListName {
+    font-size: 0.7em;
   }
+
+  .feedListButtons {
+    width: 65%;
+  }
+  #feeds {
+    height: 3em;
+  }
+}
+.feedListButtons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 #header {
-  background-color: rgb(43, 37, 49);
+  background-color: rgb(52, 37, 66);
   color: white;
   display: flex;
-
+  align-self: start;
   align-items: center;
-  justify-content: space-between;
+  position: fixed;
+  top: 0;
   width: 100vw;
 }
 #headlineHeader {
   display: flex;
   flex-direction: row;
+  align-items: center;
 }
 #navButtons {
   display: flex;
@@ -147,7 +208,6 @@ body {
 }
 
 #mainContainer {
-  height: 90vh;
   width: 100vw;
 }
 #topHeadlinesHeader {
@@ -157,21 +217,22 @@ body {
   overflow: scroll;
 }
 #myFeedsPage {
-  display: flex;
-
-  padding: 1em;
   height: 100%;
+  display: flex;
+  align-items: center;
+  padding: 1em;
+
   box-sizing: border-box;
 }
 
 #myFeedsListContainer {
-  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+  /* box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2); */
   flex: 2;
   /* margin: 0.5em; */
   padding: 1em;
+  width: 100%;
   display: flex;
   flex-direction: column;
-  /* justify-content: center; */
   align-items: center;
 }
 
@@ -238,7 +299,7 @@ body {
 #submitSpec {
   margin: 1em;
   font-size: 0.8em;
-  height: 2em;
+  height: 3em;
 }
 
 #errorMessage {
@@ -247,6 +308,9 @@ body {
   height: 1em;
 }
 
+#loading {
+  height: 100%;
+}
 .headlineImage {
   box-shadow: 1px 1px 7px rgba(0, 0, 0, 0.5);
   border-radius: 5px;
