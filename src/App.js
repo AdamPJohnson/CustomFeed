@@ -43,7 +43,7 @@ function App() {
 
   useEffect(() => {
     if (!firstRender.current) {
-      console.log(currentFeed);
+      console.log({ currentFeed });
       setLoading(true);
       fetchFeed(currentFeed)
         .then((headlines) => {

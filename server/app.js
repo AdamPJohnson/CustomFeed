@@ -73,7 +73,7 @@ app.get("/customFeed", (req, res) => {
       const { source } = rule;
       return axios
         .get(
-          `https://newsapi.org/v2/everything/?sources=${source}&apiKey=${API_KEY}`
+          `https://newsapi.org/v2/top-headlines/?cateogries=${category}&apiKey=${API_KEY}`
         )
         .catch((e) => {
           console.log(e);
