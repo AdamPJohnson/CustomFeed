@@ -1,8 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
-import axios from "axios";
 import { Button } from "@chakra-ui/react";
-function AddFeed() {
-  const [sources, setSources] = useState([]);
+import axios from "axios";
+function AddFeed({ sources, user }) {
   const [specs, setSpecs] = useState([]);
   const [errorMessage, setErrorMessage] = useState("");
   const firstUpdate = useRef(true);
@@ -25,7 +24,23 @@ function AddFeed() {
       return setErrorMessage("Please name this feed");
     }
     e.preventDefault();
-    console.log(specs);
+    console.log(user.name);
+    const payload = {
+      feedName: formData.feedName,
+      specs,
+      userName: user.name,
+    };
+    console.log(payload);
+    axios
+      .patch("http://localhost:3000/feeds/", payload)
+      .then((d) => {
+        setErrorMessage("");
+        console.log(d);
+      })
+      .catch((e) => {
+        setErrorMessage("Something went wrong");
+        console.log(e);
+      });
   };
   const onSubmitSpec = (e) => {
     e.preventDefault();
@@ -70,12 +85,6 @@ function AddFeed() {
     }
   }, [specs]);
 
-  useEffect(() => {
-    axios
-      .get("http://localhost:3000/sources")
-      .then((sources) => setSources(sources.data))
-      .catch((error) => console.log(error));
-  }, []);
   useEffect(() => {
     console.log(currentFeedSpecsText);
     document.getElementById("currentFeedSpecsText").innerHTML =
@@ -124,7 +133,13 @@ function AddFeed() {
       </form>
       <div id="currentFeedSpecsText"></div>
       <label htmlFor="feedName">Feed Name:</label>
-      <input id="feedName" type="text" name="feedName" onChange={onChange} />
+      <input
+        id="feedName"
+        type="text"
+        name="feedName"
+        value={formData.feedName}
+        onChange={onChange}
+      />
       <Button id="submitFeed" onClick={onSubmitFeed}>
         Submit Feed
       </Button>
