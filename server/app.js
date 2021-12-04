@@ -12,6 +12,7 @@ const { API_KEY } = require("./config");
 
 app.patch("/feeds", async (req, res) => {
   const { feedName, specs, userName } = req.body;
+  console.log(specs);
   const feed = { name: feedName, rules: specs };
   const query = User.find({ name: userName });
   query.exec((err, result) => {
@@ -41,10 +42,60 @@ app.patch("/feeds", async (req, res) => {
     }
   });
 });
+app.patch("/feeds/:feedName/:userName", async (req, res) => {
+  const { feedName, userName } = req.params;
+
+  User.updateOne(
+    { name: userName },
+    {
+      $pull: { feeds: { name: feedName } },
+    }
+  )
+    .then((d) => {
+      res.status(200).send();
+    })
+    .catch((e) => {
+      console.log({ e });
+      res.status(400).send();
+    });
+});
 
 app.get("/feeds", async (req, res) => {
   const { userName } = req.body;
   User.find({ name: userName }).then((user) => console.log(user));
+});
+
+app.get("/customFeed", (req, res) => {
+  const rules = JSON.parse(req.query.feed).rules;
+
+  Promise.all(
+    rules.map((rule) => {
+      const { source } = rule;
+      return axios
+        .get(
+          `https://newsapi.org/v2/everything/?sources=${source}&apiKey=${API_KEY}`
+        )
+        .catch((e) => {
+          console.log(e);
+          return [];
+        });
+    })
+  )
+    .then((resultArray) => {
+      let headlines = resultArray
+        .map((array) => (array.data ? array.data.articles : []))
+        .flat();
+
+      headlines = headlines.sort(
+        (a, b) => new Date(b.publishedAt) - new Date(a.publishedAt)
+      );
+
+      res.status(200).send(headlines);
+    })
+    .catch((e) => {
+      console.log(e);
+      res.status(404).send();
+    });
 });
 app.get("/users/:userName", async (req, res) => {
   const { userName } = req.params;
@@ -76,24 +127,6 @@ app.get("/sources/", (req, res) => {
     .then((sources) => {
       console.log(sources.data.sources.length);
       res.status(200).send(sources.data.sources);
-    })
-    .catch((e) => {
-      console.log(e);
-      res.status(404).send();
-    });
-});
-
-app.get("/headlines/:sources/:category", (req, res) => {
-  let { sources, category } = req.params;
-  sources = sources || "";
-  category = category || "";
-  axios
-    .get(
-      `https://newsapi.org/v2/top-headlines?sources=${sources}&category=${category}&apiKey=${API_KEY}`
-    )
-    .then((d) => {
-      console.log(d.data.articles);
-      res.status(200).send(d.data.articles.slice(0, 10));
     })
     .catch((e) => {
       console.log(e);
