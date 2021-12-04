@@ -6,14 +6,31 @@ const app = express();
 const db = require("./db");
 app.use(express.json());
 app.use(express.urlencoded()); //Parse URL-encoded bodies
-
+const User = require("./db/models/user");
 app.use(cors());
 const { API_KEY } = require("./config");
 
-app.patch("/feeds", (req, res) => {
-  const { feedName, specs } = req.body;
+app.patch("/feeds", async (req, res) => {
+  const { feedName, specs, userName } = req.body;
   const feed = { name: feedName, rules: specs };
-  console.log(feed);
+  const query = User.find({ name: userName });
+  query.exec((err, result) => {
+    if (err) {
+      throw err;
+    }
+    if (!result.length) {
+      var user = new User({ name: userName, feeds: [feed] });
+      user.save((err) => {
+        if (err) {
+          throw err;
+        }
+      });
+    } else {
+      User.updateOne({ name: userName }, { $push: { feeds: feed } }).then((d) =>
+        console.log(d)
+      );
+    }
+  });
 });
 
 app.get("/topHeadlines/", (req, res) => {
