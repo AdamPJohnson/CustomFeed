@@ -6,6 +6,19 @@ function FeedListItem({ feed, setIsOpen, setDetailFeed }) {
     setDetailFeed(feed);
     setIsOpen(true);
   };
+  const onDeleteClick = () => {
+    console.log(feed.name);
+    axios
+      .patch(`http://localhost:3000/feeds/${feed.name}/${user.name}`)
+      .then(() => {
+        axios
+          .get(`http://localhost:3000/users/${user.name}`)
+          .then((d) => {
+            setUser(d.data[0]);
+          })
+          .catch((error) => console.log({ error }));
+      });
+  };
   return (
     <div className="feedListItem">
       <span className="feedListName">{feed.name}</span>
