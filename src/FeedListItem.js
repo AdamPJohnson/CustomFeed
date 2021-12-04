@@ -9,17 +9,20 @@ function FeedListItem({ feed, setIsOpen, setDetailFeed }) {
   return (
     <div className="feedListItem">
       <span className="feedListName">{feed.name}</span>
-      <Button className="navButton" variant="outline-dark">
-        Select
-      </Button>
       <Button
-        className="navButton"
         variant="outline-dark"
+        className="feedListButton"
         onClick={onDetailClick}
+        size="s"
       >
         Details
       </Button>
-      <Button className="navButton" variant="outline-dark">
+      <Button
+        variant="outline-dark"
+        className="feedListButton"
+        onClick={onDeleteClick}
+        size="s"
+      >
         Delete
       </Button>
     </div>
