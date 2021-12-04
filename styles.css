@@ -31,7 +31,9 @@ body {
     width: 8em;
     height: 3em;
   }
-
+  #navButtons {
+    flex-direction: row;
+  }
   #welcome {
     font-size: 0.3em;
     margin-right: 0.5em;
@@ -74,16 +76,19 @@ body {
   .navButton {
     width: 10em;
     height: 4em;
-    font-size: 0.2em;
+    font-size: 0.3em;
+  }
+  #navButtons {
+    flex-direction: column;
   }
   #headerTitle {
   }
   #welcome {
-    font-size: 0.2em;
+    font-size: 0.3em;
   }
   #header {
     flex-direction: column;
-    height: 15vh;
+    height: 18vh;
     font-size: 2em;
     padding: 0em;
   }
@@ -132,7 +137,7 @@ body {
 }
 #navButtons {
   display: flex;
-  flex-direction: row;
+
   align-items: center;
   justify-content: space-between;
 }

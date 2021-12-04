@@ -6,20 +6,22 @@ function Header({ setPage, user }) {
       <span id="headerTitle">custom feed</span>
       <div id="navButtons">
         <span id="welcome">Welcome, {user.name}!</span>
-        <Button
-          className="navButton"
-          onClick={() => setPage("top")}
-          variant="outline-light"
-        >
-          Home
-        </Button>
-        <Button
-          className="navButton"
-          onClick={() => setPage("myfeeds")}
-          variant="outline-light"
-        >
-          My Feeds
-        </Button>
+        <div id="buttonContainer">
+          <Button
+            className="navButton"
+            onClick={() => setPage("top")}
+            variant="outline-light"
+          >
+            Home
+          </Button>
+          <Button
+            className="navButton"
+            onClick={() => setPage("myfeeds")}
+            variant="outline-light"
+          >
+            My Feeds
+          </Button>
+        </div>
       </div>
     </div>
   );
