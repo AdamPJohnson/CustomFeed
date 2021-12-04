@@ -1,5 +1,5 @@
 import React from "react";
-import { Button } from "@chakra-ui/react";
+import Button from "react-bootstrap/button";
 import axios from "axios";
 function FeedListItem({ feed, setIsOpen, setDetailFeed, user, setUser }) {
   const onDetailClick = () => {
@@ -23,10 +23,20 @@ function FeedListItem({ feed, setIsOpen, setDetailFeed, user, setUser }) {
     <div className="feedListItem">
       <span className="feedListName">{feed.name}</span>
       <div className="feedListButtons">
-        <Button className="feedListButton" onClick={onDetailClick} size="s">
+        <Button
+          variant="outline-dark"
+          className="feedListButton"
+          onClick={onDetailClick}
+          size="s"
+        >
           Details
         </Button>
-        <Button className="feedListButton" onClick={onDeleteClick} size="s">
+        <Button
+          variant="outline-dark"
+          className="feedListButton"
+          onClick={onDeleteClick}
+          size="s"
+        >
           Delete
         </Button>
       </div>

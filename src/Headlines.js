@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import HeadlineContainer from "./HeadlineContainer.js";
+import { GridLoader } from "react-spinners";
 
-function Headlines({ headlines, user, setCurrentFeed, currentFeed }) {
+function Headlines({ headlines, user, setCurrentFeed }) {
   const [currentFeedName, setCurrentFeedName] = useState("Select a Feed...");
   const onFeedChange = (e) => {
     const feedObj = user.feeds.filter(
@@ -13,7 +14,8 @@ function Headlines({ headlines, user, setCurrentFeed, currentFeed }) {
   const headlineList = headlines.map((headline) => {
     return <HeadlineContainer headline={headline} />;
   });
-
+  const feedName =
+    currentFeedName === "Select a Feed..." ? "Top Headlines" : currentFeedName;
   const feedList = user.feeds
     ? user.feeds.map((feed) => {
         return <option value={feed.name}>{feed.name}</option>;
@@ -23,7 +25,7 @@ function Headlines({ headlines, user, setCurrentFeed, currentFeed }) {
   return (
     <div id="topHeadlinesContainer">
       <div id="headlineHeader">
-        <h2 id="topHeadlinesHeader">Top Headlines</h2>
+        <h2 id="topHeadlinesHeader">{feedName}</h2>
 
         <select
           value={currentFeedName}

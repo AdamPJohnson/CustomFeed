@@ -5,11 +5,12 @@ import Headlines from "./Headlines";
 import MyFeeds from "./MyFeeds";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../styles.css";
-
+import { GridLoader } from "react-spinners";
 const userName = "Adam";
 
 function App() {
   const [headlines, setHeadlines] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [user, setUser] = useState({
     name: "Adam",
     zip: 94606,
@@ -27,6 +28,7 @@ function App() {
       .get(`http://localhost:3000/topHeadlines/`)
       .then((headlines) => {
         setHeadlines(headlines.data);
+        setLoading(false);
       })
       .catch((e) => console.log(e));
 
@@ -41,10 +43,12 @@ function App() {
   useEffect(() => {
     if (!firstRender.current) {
       console.log(currentFeed);
+      setLoading(true);
       fetchFeed(currentFeed)
         .then((headlines) => {
           console.log(headlines);
           setHeadlines(headlines.data);
+          setLoading(false);
         })
         .catch((e) => console.log(e));
     } else {
@@ -55,20 +59,25 @@ function App() {
   return (
     <>
       <Header setPage={setPage} user={user} />
-      {page === "home" && (
-        <div id="mainContainer">
-          <Headlines
-            headlines={headlines}
-            user={user}
-            setCurrentFeed={setCurrentFeed}
-            currentFeed={currentFeed}
-          />
-        </div>
-      )}
-      {page === "myfeeds" && (
-        <div id="mainContainer">
-          <MyFeeds user={user} setUser={setUser} />
-        </div>
+      {loading && <GridLoader color="purple" />}
+      {!loading && (
+        <>
+          {page === "home" && (
+            <div id="mainContainer">
+              <Headlines
+                headlines={headlines}
+                user={user}
+                setCurrentFeed={setCurrentFeed}
+                loading={loading}
+              />
+            </div>
+          )}
+          {page === "myfeeds" && (
+            <div id="mainContainer">
+              <MyFeeds user={user} setUser={setUser} />
+            </div>
+          )}
+        </>
       )}
     </>
   );
