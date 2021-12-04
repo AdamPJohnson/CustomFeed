@@ -125,7 +125,6 @@ app.get("/sources/", (req, res) => {
       `https://newsapi.org/v2/top-headlines/sources/?country=us&apiKey=${API_KEY}`
     )
     .then((sources) => {
-      console.log(sources.data.sources.length);
       res.status(200).send(sources.data.sources);
     })
     .catch((e) => {

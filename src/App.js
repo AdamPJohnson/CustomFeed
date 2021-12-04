@@ -5,24 +5,31 @@ import Headlines from "./Headlines";
 import MyFeeds from "./MyFeeds";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../styles.css";
-
+import { PropagateLoader } from "react-spinners";
 const userName = "Adam";
 
 function App() {
   const [headlines, setHeadlines] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [currentFeedName, setCurrentFeedName] = useState("Select a Feed...");
   const [user, setUser] = useState({
     name: "Adam",
     zip: 94606,
     feeds: [],
   });
-  const [page, setPage] = useState("top");
+  const [page, setPage] = useState("home");
   const [currentFeed, setCurrentFeed] = useState({});
   const firstRender = useRef(true);
+
+  const fetchFeed = (feed) => {
+    return axios.get(`http://localhost:3000/customFeed/`, { params: { feed } });
+  };
   useEffect(() => {
     axios
       .get(`http://localhost:3000/topHeadlines/`)
       .then((headlines) => {
         setHeadlines(headlines.data);
+        setLoading(false);
       })
       .catch((e) => console.log(e));
 
@@ -36,29 +43,44 @@ function App() {
 
   useEffect(() => {
     if (!firstRender.current) {
+      console.log(currentFeed);
+      setLoading(true);
       fetchFeed(currentFeed)
         .then((headlines) => {
-          setHeadlines([headlines.data]);
+          console.log(headlines);
+          setHeadlines(headlines.data);
+          setLoading(false);
         })
         .catch((e) => console.log(e));
+    } else {
+      firstRender.current = false;
     }
   }, [currentFeed]);
 
-  const fetchFeed = (feed) => {
-    return axios.get(`http://localhost:3000/customFeed`, { feed });
-  };
   return (
     <>
       <Header setPage={setPage} user={user} />
-      {page === "top" && (
-        <div id="mainContainer">
-          <Headlines headlines={headlines} user={user} />
-        </div>
-      )}
-      {page === "myfeeds" && (
-        <div id="mainContainer">
-          <MyFeeds user={user} setUser={setUser} />
-        </div>
+      {loading && <PropagateLoader color="purple" />}
+      {!loading && (
+        <>
+          {page === "home" && (
+            <div id="mainContainer">
+              <Headlines
+                headlines={headlines}
+                user={user}
+                setCurrentFeed={setCurrentFeed}
+                loading={loading}
+                currentFeedName={currentFeedName}
+                setCurrentFeedName={setCurrentFeedName}
+              />
+            </div>
+          )}
+          {page === "myfeeds" && (
+            <div id="mainContainer">
+              <MyFeeds user={user} setUser={setUser} />
+            </div>
+          )}
+        </>
       )}
     </>
   );

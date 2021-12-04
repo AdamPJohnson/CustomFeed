@@ -9,7 +9,7 @@ function Header({ setPage, user }) {
         <div id="buttonContainer">
           <Button
             className="navButton"
-            onClick={() => setPage("top")}
+            onClick={() => setPage("home")}
             variant="outline-light"
           >
             Home
