@@ -91,7 +91,7 @@ function AddFeed({ sources, user, setUser }) {
   });
   return (
     <div id="addFeed">
-      <h4>Add a Custom Feed!</h4>
+      <strong>New Feed:</strong>
 
       <form id="addFeedForm">
         <strong>I want news</strong>
